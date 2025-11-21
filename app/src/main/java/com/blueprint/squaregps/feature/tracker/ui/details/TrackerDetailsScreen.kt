@@ -1,0 +1,103 @@
+package com.blueprint.squaregps.feature.tracker.ui.details
+
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.blueprint.squaregps.navigation.AppNavigator
+import org.koin.androidx.compose.koinViewModel
+import org.koin.core.parameter.parametersOf
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TrackerDetailsScreen(
+    trackerId: Long,
+    viewModel: TrackerDetailsViewModel = koinViewModel(parameters = { parametersOf(trackerId) }),
+    appNavigator: AppNavigator = viewModel,
+) {
+    val state by viewModel.state.collectAsStateWithLifecycle()
+
+    val snackbarHostState = remember { SnackbarHostState() }
+
+    LaunchedEffect(state.errorMessage) {
+        state.errorMessage?.let {
+            snackbarHostState.showSnackbar(it)
+        }
+    }
+
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("${state.tracker?.label ?: "Tracker"} Details") },
+                navigationIcon = {
+                    IconButton(onClick = { appNavigator.back() }) {
+                        Icon(Icons.Default.ArrowBack, contentDescription = "Back")
+                    }
+                }
+            )
+        },
+        snackbarHost = { SnackbarHost(snackbarHostState) }
+    ) { paddingValues ->
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+        ) {
+            if (state.loading) {
+                CircularProgressIndicator(
+                    modifier = Modifier.align(Alignment.Center)
+                )
+            } else {
+                state.tracker?.let { tracker ->
+                    Column(
+                        modifier = Modifier
+                            .padding(16.dp)
+                            .fillMaxWidth()
+                    ) {
+                        Text(
+                            text = tracker.label,
+                            style = MaterialTheme.typography.headlineMedium
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        if (!tracker.model.isNullOrEmpty()) {
+                            Text(
+                                text = "Model: ${tracker.model}",
+                                style = MaterialTheme.typography.bodyLarge
+                            )
+                            Spacer(modifier = Modifier.height(8.dp))
+                        }
+                        state.trackerState?.location?.let { location ->
+                            location.latLng?.let { latLng ->
+                                Text(
+                                    text = "Location: ${latLng.lat}, ${latLng.lng}",
+                                    style = MaterialTheme.typography.bodyLarge
+                                )
+                                Spacer(modifier = Modifier.height(8.dp))
+                            }
+                            location.speed?.let { speed ->
+                                Text(
+                                    text = "Speed: $speed km/h",
+                                    style = MaterialTheme.typography.bodyLarge
+                                )
+                                Spacer(modifier = Modifier.height(8.dp))
+                            }
+                            location.heading?.let { heading ->
+                                Text(
+                                    text = "Heading: $heading°",
+                                    style = MaterialTheme.typography.bodyLarge
+                                )
+                                Spacer(modifier = Modifier.height(8.dp))
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
