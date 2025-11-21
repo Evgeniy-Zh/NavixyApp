@@ -8,6 +8,7 @@ import com.blueprint.squaregps.feature.auth.domain.LoginRepository
 import com.blueprint.squaregps.feature.auth.ui.model.LoginAction
 import com.blueprint.squaregps.feature.auth.ui.model.LoginState
 import com.blueprint.squaregps.navigation.AppNavigator
+import com.blueprint.squaregps.navigation.LoginRoute
 import com.blueprint.squaregps.navigation.TrackerListRoute
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -56,7 +57,7 @@ class LoginViewModel(
             run = {
                 loading.value = true
                 loginRepository.login("demo-eu@navixy.com", "123456")
-                appNavigator.navigateTo(TrackerListRoute, TrackerListRoute)
+                appNavigator.navigateTo(route = TrackerListRoute, popUpTo = LoginRoute)
             },
             onException = { e ->
                 loading.value = false

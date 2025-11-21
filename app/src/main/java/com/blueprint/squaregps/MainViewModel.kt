@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.blueprint.squaregps.core.auth.SessionHashProvider
 import com.blueprint.squaregps.navigation.AppNavigator
 import com.blueprint.squaregps.navigation.LoginRoute
+import com.blueprint.squaregps.navigation.TrackerListRoute
 import kotlinx.coroutines.launch
 
 class MainViewModel(
@@ -16,7 +17,7 @@ class MainViewModel(
         viewModelScope.launch {
             sessionHashProvider.observeSessionHash().collect { value ->
                 if (value == null) {
-                    appNavigator.navigateTo(LoginRoute)
+                    appNavigator.navigateTo(route = LoginRoute, popUpTo = TrackerListRoute)
                 }
             }
         }

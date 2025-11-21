@@ -11,6 +11,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.blueprint.squaregps.feature.auth.ui.model.LoginAction
 import org.koin.androidx.compose.koinViewModel
+import androidx.compose.runtime.remember
 
 @Composable
 fun LoginScreen(
@@ -22,13 +23,15 @@ fun LoginScreen(
     val state by viewModel.state.collectAsStateWithLifecycle()
     val isLoading = state.loading
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
+    Scaffold { paddingValues ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
         OutlinedTextField(
             value = username,
             onValueChange = { username = it },
@@ -82,6 +85,7 @@ fun LoginScreen(
                 "Demo Login",
                 textDecoration = TextDecoration.Underline
             )
+        }
         }
     }
 }
