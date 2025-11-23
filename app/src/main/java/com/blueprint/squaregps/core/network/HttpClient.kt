@@ -65,6 +65,7 @@ fun createHttpClient(sessionHashProvider: SessionHashMutableProvider): HttpClien
                     sessionHashProvider.clearSessionHash()
                     throw UnauthorizedException(message = response.bodyAsText())
                 }
+                //TODO: Check response body statuses from API
             }
         }
 

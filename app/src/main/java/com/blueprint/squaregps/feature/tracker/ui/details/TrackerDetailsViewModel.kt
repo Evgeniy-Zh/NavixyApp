@@ -9,7 +9,6 @@ import com.blueprint.squaregps.feature.tracker.domain.TrackerRepository
 import com.blueprint.squaregps.feature.tracker.ui.model.TrackerDetailsState
 import com.blueprint.squaregps.navigation.AppNavigator
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.onStart
