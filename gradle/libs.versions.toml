@@ -8,7 +8,7 @@ espressoCore = "3.7.0"
 lifecycleRuntimeKtx = "2.9.4"
 activityCompose = "1.11.0"
 composeBom = "2024.09.00"
-koin = "3.5.3"
+koin = "4.1.1"
 compose-navigation = "2.9.6"
 
 ktor = "3.0.0"
@@ -16,6 +16,8 @@ ktorSerializationKotlinxJson = "3.3.2"
 kotlinx-serialization = "1.5.0"
 
 datastorePreferences = "1.1.7"
+junitJupiter = "5.8.1"
+mock = "1.13.13"
 
 
 
@@ -35,11 +37,16 @@ androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-man
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 
+#Testing
+mokk = { module = "io.mockk:mockk-android", version.ref = "mock" }
+mokk-android = { module = "io.mockk:mockk-android", version.ref = "mock"}
+coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version = "1.10.2"}
 
 #DI
 koin = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 koin-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
+koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
 
 #Navigation
 navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "compose-navigation" }
@@ -54,6 +61,7 @@ ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "k
 
 #Datastore
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
+junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junitJupiter" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -20,7 +20,7 @@ class TrackerDetailsViewModel(
     private val trackerPoller: TrackerPoller,
     private val appNavigator: AppNavigator,
     private val trackerId: Long,
-) : ViewModel(), AppNavigator by appNavigator{
+) : ViewModel(), AppNavigator by appNavigator {
 
     private val loading = MutableStateFlow(false)
     private val errorMessage = MutableStateFlow<String?>(null)

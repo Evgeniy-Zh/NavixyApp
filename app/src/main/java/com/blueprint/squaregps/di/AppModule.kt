@@ -8,7 +8,7 @@ import com.blueprint.squaregps.core.network.createHttpClient
 import com.blueprint.squaregps.navigation.AppNavigator
 import com.blueprint.squaregps.navigation.AppNavigatorImpl
 import com.blueprint.squaregps.navigation.NavigationEventHandler
-import org.koin.androidx.viewmodel.dsl.viewModelOf
+import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.binds
 import org.koin.dsl.module
 
